@@ -112,10 +112,10 @@ def hangman(secretWord):
     while isWordGuessed(secretWord,lettersGuessed) == False:
         
         print("You have " + str(guesses) + " guesses left.")
-        print("Available letters " + getAvailableLetters(lettersGuessed))
-        newLetter = input("Enter a letter: ")
+        print("Available letters: " + getAvailableLetters(lettersGuessed))
+        newLetter = input("Please guess a letter: ")
         if newLetter in lettersGuessed:
-            print("Oops! You've already guessed that letter! " + getGuessedWord(secretWord, lettersGuessed))
+            print("Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed))
         else:
             lettersGuessed.append(newLetter.lower())
             if newLetter in secretWord:
@@ -125,8 +125,9 @@ def hangman(secretWord):
                 guesses -= 1
         print("-----------------------------")
         if guesses == 0:
-            print("Game over better luck next time! The word was: " + secretWord)
+            print("Sorry, you ran out of guesses. The word was " + secretWord + ".")
             quit()
+    print("Congratulations, you won!")
         
 
 secretWord = chooseWord(wordlist).lower()
