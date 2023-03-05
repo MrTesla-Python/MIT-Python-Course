@@ -5,20 +5,14 @@ def isIn(char, aStr):
     
     returns: True if char is in aStr; False otherwise
     '''
-    x = 0
-    if x == 0:
-        char = "".join(sorted(aStr))
-        lower = 0
-        upper = len(aStr)
-        x+=1
-    ans = (lower+upper)//2
-    if char == aStr[ans]:
+    mid = len(aStr)//2
+    if char == "" and aStr == "":
         return True
+    elif char == "" or aStr == "":
+        return False
+    elif aStr[mid] == char:
+        return True
+    elif aStr[mid] < char:
+        return isIn(char, aStr[mid+1:])
     else:
-        if char > aStr:
-            lower = ans
-        else: 
-            upper = ans
-        return isIn(char, aStr)
-print(isIn("a", "abcd"))
-        
+        return isIn(char, aStr[:mid])
