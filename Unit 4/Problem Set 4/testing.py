@@ -49,4 +49,43 @@ def updateHand(hand, word):
     
 hand = {'a':1, 'q':1, 'l':2, 'm':1, 'u':1, 'i':1}
 
-print(updateHand(hand, "quail"))
+print(updateHand(hand, "quailll"))
+
+def getFrequencyDict(sequence):
+    """
+    Returns a dictionary where the keys are elements of the sequence
+    and the values are integer counts, for the number of times that
+    an element is repeated in the sequence.
+
+    sequence: string or list
+    return: dictionary
+    """
+    # freqs: dictionary (element_type -> int)
+    freq = {}
+    for x in sequence:
+        freq[x] = freq.get(x,0) + 1
+    return freq
+	
+def isValidWord(word, hand, wordList):
+    """
+    Returns True if word is in the wordList and is entirely
+    composed of letters in the hand. Otherwise, returns False.
+
+    Does not mutate hand or wordList.
+   
+    word: string
+    hand: dictionary (string -> int)
+    wordList: list of lowercase strings
+    """
+    word_dict = getFrequencyDict(word)
+    if len(word_dict) > len(hand):
+        return False
+    for key in word_dict.keys():
+        if key not in hand.keys():
+            return False
+        elif word_dict[key] > hand[key]:
+            return False
+    return True
+
+WORDLIST_FILENAME = "C:/Users/trist/OneDrive/Documents/GitHub/MIT-Python-Course/Unit 4/Problem Set 4/words.txt"
+print(isValidWord("quail", hand, WORDLIST_FILENAME))
