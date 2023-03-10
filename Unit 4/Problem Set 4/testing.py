@@ -78,14 +78,17 @@ def isValidWord(word, hand, wordList):
     wordList: list of lowercase strings
     """
     word_dict = getFrequencyDict(word)
-    if len(word_dict) > len(hand):
+    if word in wordList:
+        if len(word_dict) > len(hand):
+            return False
+        for key in word_dict.keys():
+            if key not in hand.keys():
+                return False
+            elif word_dict[key] > hand[key]:
+                return False
+        return True
+    else:
         return False
-    for key in word_dict.keys():
-        if key not in hand.keys():
-            return False
-        elif word_dict[key] > hand[key]:
-            return False
-    return True
 
 WORDLIST_FILENAME = "C:/Users/trist/OneDrive/Documents/GitHub/MIT-Python-Course/Unit 4/Problem Set 4/words.txt"
-print(isValidWord("quail", hand, WORDLIST_FILENAME))
+print(isValidWord("F", hand, WORDLIST_FILENAME))
